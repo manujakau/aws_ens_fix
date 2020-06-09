@@ -1,5 +1,5 @@
 #!/bin/bash
-yum install kernel-devel-$(uname -r) gcc git patch rpm-build wget
+yum install -y kernel-devel-$(uname -r) gcc git patch rpm-build wget
 wget https://github.com/amzn/amzn-drivers/archive/master.zip
 unzip master.zip
 cd amzn-drivers-master/kernel/linux/ena
@@ -11,7 +11,7 @@ echo 'add_drivers+=" ena "' >> /etc/dracut.conf.d/ena.conf
 dracut -f -v                                              
 lsinitrd /boot/initramfs-xxx.el6.x86_64.img | grep ena.ko
 
-yum upgrade kernel && reboot
+yum upgrade -y kernel && reboot
 
 yum install -y http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 yum install dkms -y
